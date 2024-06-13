@@ -192,4 +192,4 @@ lasers:
       vert_offset_correction: 0.0,
     }
 num_lasers: 16
-distance_resolution: 0.002
+distance_resolution: 0.005
