@@ -228,7 +228,8 @@ Status VelodyneHwInterfaceRosWrapper::GetParameters(
 void VelodyneHwInterfaceRosWrapper::ReceiveScanDataCallback(
   std::unique_ptr<velodyne_msgs::msg::VelodyneScan> scan_buffer)
 {
-  // Publish
+  std::scoped_lock lock(mtx_config_);
+  // Safely access sensor_configuration_
   scan_buffer->header.frame_id = sensor_configuration_.frame_id;
   scan_buffer->header.stamp = scan_buffer->packets.front().stamp;
   velodyne_scan_pub_->publish(*scan_buffer);
